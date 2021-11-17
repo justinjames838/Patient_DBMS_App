@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>
+            Pharmacist 
+        </h1>
+        
+        <br/>
+        
+        <form action="/get_medicine" method="POST">
+        <input  type="text" name="med_name" id="med_name"/>
+
+        <button type="submit" id = get_medicine>
+            Get medicine details
+        </button>
+        </form>
+
+        <br/>
+        {% block med_details %}
+        <div id = "med_details">
+
+        </div>
+        {% endblock %}
+    </body>
+    
+</html>

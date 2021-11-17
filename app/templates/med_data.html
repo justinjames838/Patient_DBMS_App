@@ -1,0 +1,21 @@
+{% extends 'Pharmacist.html'%}
+
+{% block med_details %}
+        <div id = "med_details">
+            {% if res.data|length >0 %}
+            <table>
+                {% for row in res.data %}
+                <tr class = "med_row">
+                    {% for col in row %}
+                    <td class = "med_col">
+                        {{col}}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            No records found
+            {% endif %}
+        </div>
+{% endblock %}
