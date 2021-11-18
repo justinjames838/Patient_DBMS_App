@@ -21,6 +21,33 @@
 
         </div>
         {% endblock %}
+
+        <br/>
+
+        <form action="/add_medicine" method="POST">
+            <div>
+            <label class="generic_med_label">Name of medicine </label>
+            <input type="text" name="new_med_name" id="new_med_name"/>
+            
+            <br/>
+            <label class="generic_med_label">Cost of medicine </label>
+            <input type="number" name="new_med_cost" id="new_med_cost"/>
+            
+            <br/>
+            <label class="generic_med_label">Info about medicine </label>
+            <input type="text" width="150" height="200" name="new_med_info" id="new_med_info"/>
+            
+            <button type="submit">
+                Add medicine
+            </button>
+
+            </div>
+        </form>
+        {% block insert_results %}
+        <div id="med_insert_res_placeholder">
+
+        </div>
+        {% endblock %}
     </body>
     
 </html>

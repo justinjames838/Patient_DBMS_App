@@ -66,5 +66,35 @@ def create_app(test_config=None):
             res = {'data':res}
             
             return render_template("med_data.html",res = res)
+    @app.route('/add_medicine',methods=["POST"])
+    def add_medicine():
+        if request.method=="POST":
+
+            existing=0
+
+            existing_names= db.execute("select name from medicine")
+            existing_names = [list(row) for row in existing_names]
+            existing_names = [[str(bit) for bit in item] for item in existing_names]
+            existing_names = [item[0] for item in existing_names]
+
+            new_name = request.form.get("new_med_name")
+            new_cost = request.form.get("new_med_cost")
+            new_info = request.form.get("new_med_info")
+            if new_name in existing_names:
+                existing=1
+            
+            max_id = db.execute("select max(medicine_id) from medicine")
+            max_id = [list(row) for row in max_id]
+            max_id = [[int((str(bit))) for bit in item] for item in max_id]
+            max_id = [item[0] for item in max_id]
+
+            max_id = max_id[0] + 1
+
+            if(existing == 0):
+                db.execute("insert into medicine values ("+str(max_id)+","+new_cost+",'"+new_name+"'"+",'"+new_info+"'"+")")
+            else:
+                db.execute("update medicine set cost = "+new_cost+",info = '"+new_info+"'"+ "where name = '"+new_name+"'" )
+            
+            return render_template("med_insert_res.html",exists = existing)
 
     return app

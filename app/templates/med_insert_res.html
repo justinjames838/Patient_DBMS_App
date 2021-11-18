@@ -1,0 +1,12 @@
+{% extends 'Pharmacist.html' %}
+
+{% block insert_results %}
+
+{% if exists == 0 %}
+ Added medicine successfully
+
+{% else %}
+ Medicine details updated
+{% endif %}
+
+{% endblock %}
