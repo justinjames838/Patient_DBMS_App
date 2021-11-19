@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div style="display: flex ;flex-direction: row; align-items: center;" id = "titlebar">
+            <div style="margin: 10px;">
+                <h1>Receptionist</h1> 
+            </div>
+            
+            <div style="float: right;" >
+    
+            <form action="/" method="get">
+            <button id = "logout" type="submit">
+                Logout
+            </button>
+            </form>
+    
+            </div>
+        </div>
+        
+        <br/>
+        <button id = "show_add_patient">
+            Register a patient
+        </button>
+
+        <br/>
+        
+        <div style="display: none;" id = "add_patient_div">
+            <form action="/add_patient" method="POST">
+            <label>Enter the details of the patient </label><br/>
+            
+            <label>First Name </label> <input type="text" name="patient_fname" id = "patient_fname"/>  <br/>
+            <label>Middle Name </label> <input type="text" name="patient_mname" id = "patient_mname"/> <br/>
+            <label>Last Name </label> <input type="text" name="patient_lname" id = "patient_lname"/>   <br/>
+
+            <br/>
+
+            <label>Gender </label>
+            <select id = "patient_gender" name ="patient_gender">
+                <option selected value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <br/>
+
+            <label>Phone no </label>
+            <input type="tel" id ="patient_phone" name = "patient_phone"/>
+            <br/>
+
+            <label>Age </label>
+            <input type="number" id="patient_age" name = "patient_age"/>
+            <br/>
+
+            <label>Admission Date </label>
+            <input type="date" id = "patient_admit_date" name = "patient_admit_date"/>
+            <br/>
+
+            <label>Room type </label>
+            <input type="text" id = "patient_room_type" name = "patient_room_type"/>
+            <br/>
+
+            <label>Enter attending doctor's details </label><br/>
+            <label>First Name </label> <input type="text" name="attending_doc_fname" id = "attending_doc_fname"/>  <br/>
+            <label>Middle Name </label> <input type="text" name="attending_doc_mname" id = "attending_doc_mname"/> <br/>
+            <label>Last Name </label> <input type="text" name="attending_doc_lname" id = "attending_doc_lname"/>   <br/>
+
+            <button type="submit">
+                Add Patient
+            </button>
+
+            </form>
+    
+            <br/>
+            {% block patient_addition_result %}
+            <div id = "patient_addition_result">
+    
+            </div>
+            {% endblock %}
+    
+            <br/>
+        </div>
+
+        <br/>
+        <br/>
+        
+        <button id = "show_discharge_patient">
+            Discharge Patient
+        </button>
+
+        <br/>
+        <div style="display: none;" id="discharge_patient_div">
+            <form action="/discharge_patient" method="POST">
+                <label>Enter the details of the patient </label><br/>
+
+                <label>First Name </label> <input type="text" name="d_patient_fname" id = "d_patient_fname"/>  <br/>
+                <label>Middle Name </label> <input type="text" name="d_patient_mname" id = "d_patient_mname"/> <br/>
+                <label>Last Name </label> <input type="text" name="d_patient_lname" id = "d_patient_lname"/>   <br/>
+
+                <br/>
+
+                <label>Enter discharge date </label><br/>
+                <input type="date" id="patient_discharge_date" name="patient_discharge_date"/> <br/>
+
+                <br/>
+                <button type = "submit">
+                    Discharge Patient
+                </button>
+
+            </form>
+            <br/>
+            {% block patient_discharge_result %}
+            <div id = "patient_discharge_result">
+    
+            </div>
+            {% endblock %}
+    
+            <br/>
+        </div>
+
+        </div>
+        
+    </body>
+    <script>
+        var add_patient_div = document.getElementById("add_patient_div")
+        var show_add_patient_but = document.getElementById("show_add_patient")
+
+        var discharge_patient_div = document.getElementById("discharge_patient_div")
+        var show_discharge_patient_but = document.getElementById("show_discharge_patient")
+
+        function show(name){
+            if(name=="get"){
+                get_patient_div.style.display = "block"
+            }
+            else if(name=="add"){
+                add_patient_div.style.display = "block"
+            }
+            else if(name=="discharge"){
+                discharge_patient_div.style.display = "block"
+            }
+            else{
+
+            }
+        }
+
+        show_add_patient_but.addEventListener('click',(event)=>{
+            if(add_patient_div.style.display=="none"){
+                show("add")
+            }
+        })
+
+        show_discharge_patient_but.addEventListener('click',(event)=>{
+            if(discharge_patient_div.style.display=="none"){
+                show("discharge")
+            }
+        })
+    </script>
+</html>

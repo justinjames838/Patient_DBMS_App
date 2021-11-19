@@ -1,0 +1,16 @@
+{% extends 'Receptionist.html' %}
+
+{% block patient_discharge_result %}
+
+{% if data["patient_not_exist"] == 1 %}
+    Provided Patient does not exist
+{% else %}
+    Patient has been discharged
+{% endif %}
+
+<script>
+    document.getElementById("discharge_patient_div").style.display= "block"
+    
+</script>
+{% endblock %}
+

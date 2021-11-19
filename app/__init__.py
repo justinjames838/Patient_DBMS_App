@@ -37,6 +37,7 @@ def create_app(test_config=None):
     def hello():
         session["Pharmacist"] = False
         session["Room_Manager"] = False
+        session["Receptionist"] = False
         return render_template("login.html")
     
     @app.route('/login',methods = ["POST","GET"])
@@ -50,6 +51,9 @@ def create_app(test_config=None):
             elif(user=="Room_Manager" and passwd =="room_manager"):
                 session["Room_Manager"] = True
                 return redirect(url_for("Room_Manager"))
+            elif(user=="Receptionist" and passwd =="reception"):
+                session["Receptionist"] = True
+                return redirect(url_for("Receptionist"))
             else:
                 return render_template("invalid_login.html")
         else:
@@ -200,6 +204,111 @@ def create_app(test_config=None):
                 return render_template("room_nurse_assign.html",data =data)
                 
 
+    @app.route("/Receptionist",methods=["POST","GET"])
+    def Receptionist():
+        if request.method=="GET":
+            if session["Receptionist"] :
+                return render_template("Receptionist.html")
+            else:
+                return render_template("login.html")
+
+    @app.route("/add_patient",methods=["POST"])
+    def add_patient():
+        if request.method=="POST":
+
+            patient_fname = request.form.get("patient_fname")
+          
+            patient_mname = request.form.get("patient_mname")
+       
+            patient_lname = request.form.get("patient_lname")
+
+            patients = db.execute("select patient_id from patient where fname = '"+patient_fname+"' and mname = '"+patient_mname+"' and lname = '"+patient_lname+"' ")
+            patients = [list(row)[0] for row in patients]
+
+            age = request.form.get("patient_age")
+            phone = request.form.get("patient_phone")
+
+            gender = request.form.get("patient_gender")
+         
+
+            if gender == "Male":
+                gender = "M"
+            else:
+                gender = "F"
+            
+
+           
+            admit_date = request.form.get("patient_admit_date")
+            room_type = request.form.get("patient_room_type")
+
+
+            rooms = db.execute("select type from room")
+            rooms = [list(row) for row in rooms]
+            rooms = [str(item[0]) for item in rooms]
+
+            doc_fname = request.form.get("attending_doc_fname")
+            doc_mname = request.form.get("attending_doc_mname")
+            doc_lname = request.form.get("attending_doc_lname")
+
+
+            docs = db.execute("select doctor_id from doctor where fname = '"+doc_fname+"' and mname = '"+doc_mname+"' and lname = '"+doc_lname+"' ")
+            docs = [list(row)[0] for row in docs]
+
+            max_id = db.execute("select max(patient_id) from patient")
+            max_id = [list(row) for row in max_id]
+            max_id = [[int((str(bit))) for bit in item] for item in max_id]
+            max_id = [item[0] for item in max_id]
+
+            max_id = max_id[0] + 1
+
+            if len(patients)>0:
+                data = dict()
+                data["patient_already_exist"]  = 1
+                return render_template("patient_insert_res.html",data = data)
+            elif room_type not in rooms:
+                data = dict()
+                data["room_not_exist"] = 1
+                return render_template("patient_insert_res.html",data = data)
+            elif len(docs)==0:
+                data = dict()
+                data["doc_not_exist"] = 1
+                return render_template("patient_insert_res.html",data = data)
+            else:
+                data = dict()
+                data["room_not_exist"] = 0
+                data["nurse_not_exist"] = 0
+                r_id = db.execute("select room_id from room where type = '"+room_type+"'")
+                r_id = [str(list(row)[0]) for row in r_id]
+                r_id = r_id[0]
+                doc_id = docs[0]
+
+                db.execute("insert into patient values ('"+str(max_id)+"','"+patient_fname+"','"+patient_mname+"','"+patient_lname+"',NULL,NULL,'"+r_id+"','"+gender+"','"+phone+"','"+age+"',NULL,'"+doc_id+"','"+admit_date+"',NULL) ")
+                return render_template("patient_insert_res.html",data =data)
+
+    @app.route("/discharge_patient",methods=["POST"])
+    def discharge_patient():
+        if request.method=="POST":
+            d_patient_fname = request.form.get("d_patient_fname")
+          
+            d_patient_mname = request.form.get("d_patient_mname")
+       
+            d_patient_lname = request.form.get("d_patient_lname")
+
+            discharge_date = request.form.get("patient_discharge_date")
+
+            patients = db.execute("select patient_id from patient where fname = '"+d_patient_fname+"' and mname = '"+d_patient_mname+"' and lname = '"+d_patient_lname+"' ")
+            patients = [list(row)[0] for row in patients]
+
+            if(len(patients)==0):
+                data = dict()
+                data["patient_not_exist"] = 1
+                return render_template("patient_discharge_res.html",data = data)
+            else:
+                data = dict()
+                data["patient_not_exist"] = 0
+                db.execute("update patient set discharge_date = '"+discharge_date+"' where patient_id = '"+str(patients[0])+"'")
+                return render_template("patient_discharge_res.html",data = data)
+                
 
 
 

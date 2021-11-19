@@ -1,0 +1,19 @@
+{% extends 'Receptionist.html' %}
+
+{% block patient_addition_result %}
+
+{% if data["patient_already_exist"]==1%}
+    Patient already exists
+{% elif data["room_not_exist"]==1 %}
+    Provided room does not exist
+{% elif data["doc_not_exist"] == 1 %}
+    Provided doctor does not exist
+{% else %}
+    Patient has been added successfully
+{% endif %}
+<script>
+    document.getElementById("add_patient_div").style.display= "block"
+    
+</script>
+
+{% endblock %}
