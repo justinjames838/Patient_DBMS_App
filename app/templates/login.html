@@ -1,25 +1,38 @@
 <!DOCTYPE html>
+
     <body>
-        <h1 id="label1">
-            Patient DBMS App
+        <header>
+            <h2 style="text-align: center; padding: 3px; background-color: darksalmon; color: white;">
+                HOSPITAL DATABASE MANAGEMENT SYSTEM
+            </h2>
+        </header>
+        <h1 style="text-align: center;" style="font-family: 'Times New Roman', Times, serif;" id="label1">
+            Login page
         </h1>
-        <br/>
-        <form action="/login" method="POST">
-           <label>Username </label> <input type="text" name="username" id="username"/><br/><br/>
-            <label>Password </label> <input type="password" name="password" id="password"/><br/>
-        <br/>
-        <button type="submit">
+        <form style="text-align: center;" action="/login" method="POST">
+            <input type="text" style="text-align: center"; name="username" placeholder="Username" id="username"/><br/>
+            <br/>
+            <input type="text" style="text-align: center"; name="password" placeholder="Password" id="password"/><br/>
+            <br/>
+
+        <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" ,  type="submit">
             login
         </button>
             
         </form>
-        <br/>
         {% block invalid %}
         <div id = "invalid_warning">
 
         </div>
         {% endblock %}
         
+        <footer>
+            <h3 style="text-align: center; padding: 3px; background-color: rgb(253, 253, 253); color: rgb(0, 0, 0);">
+            Contact Us At: hospital@gmail.com
+            <br/>
+                             +911234567890               
+            </h3>
+        </footer>
     </body>
     
 </html>
