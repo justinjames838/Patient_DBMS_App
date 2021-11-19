@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <header>
+            <h2 style="text-align: center; padding: 3px; background-color: darksalmon; color: white;">
+                HOSPITAL DATABASE MANAGEMENT SYSTEM
+            </h2>
+        </header>
     <div style="display: flex ;flex-direction: row; align-items: center;" id = "titlebar">
         <div style="margin: 10px;">
-            <h1>Pharmacist</h1> 
+            <h1>Pharmacist        </h1>
         </div>
+
         
         <div style="float: right;" >
 
         <form action="/" method="get">
-        <button id = "logout" type="submit">
+        
+
+        <button style="background-color: #b12222; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;"id = "logout" type="submit">
             Logout
         </button>
         </form>
@@ -18,7 +26,7 @@
     </div>
     <br/>
     
-    <button id = "show_get_med">
+    <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "show_get_med">
             Retrieve medicine details
     </button>
     <br/>
@@ -49,7 +57,7 @@
 
     <br/>
 
-    <button id = "show_add_med">
+    <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "show_add_med">
         Add or update medicine details
     </button>
 
@@ -82,7 +90,7 @@
 
         </div>
         {% endblock %}
-
+        
     </div>
     </body>
     <script>
@@ -116,4 +124,12 @@
             }
         })
     </script>
+    <footer>
+        <h3 style="text-align: center; padding: 3px; background-color: rgb(253, 253, 253); color: rgb(0, 0, 0);">
+        Contact Us At: hospital@gmail.com
+        <br/>
+                         +911234567890               
+        </h3>
+    </footer>
+
 </html>
