@@ -12,12 +12,8 @@
             </div>
             
             <div style="float: right;" >
-    
-            <form action="/" method="get">
-            <button style="background-color: #b12222; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "logout" type="submit">
-                Logout
-            </button>
-            </form>
+                
+            
     
             </div>
         </div>
@@ -25,16 +21,19 @@
         <br/>
 
     <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "show_get_room">
-        Retrieve Room Details
+        Retrieve Room Details<br/>
     </button>
-
     <br/>
+    <br/>
+    
         
     <div style="display: none;" id = "get_room_div">
         <form action="/get_room" method="POST">
         <label id = "room_type_label">
-            Enter Room Type
+            Enter Room Type:
+    
         </label>
+        <br/>
         <input  type="text" name="room_type" id="room_type"/>
 
         <button type="submit" id = get_room>
@@ -56,20 +55,20 @@
     <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "show_add_room">
         Add or update room details
     </button>
-
+    <br/>
     <br/>
 
     <div style="display: none;" id = "add_room_div">
         <form action="/add_room" method="POST">
             <div>
-            <label class="room_label">Type of Room </label>
+            <label class="room_label">Type of Room: </label> <br/>
             <input type="text" name="new_room_type" id="new_room_type"/>
             
             <br/>
-            <label class="room_label">Cost of Room </label>
+            <label class="room_label">Cost of Room: </label> <br/>
             <input type="number" name="new_room_cost" id="new_room_cost"/>
             
-            <br/>
+            
  
             <button type="submit">
                 Add Room
@@ -92,24 +91,24 @@
     <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;"  id = "show_assign_nurse">
         Assign nurses to a room
     </button>
-
+   
     <br/>
 
     <div style="display: none;" id = "assign_nurse_div">
         <form action="/assign_nurse" method="POST">
             <div>
-                <label>Enter the details of the nurse and the room information</label>
+                <label style="font-size: large; font-weight: bold;">Enter the details of the nurse and the room information:</label> <br/>
                 <br/>
+                
+                <label style="font-size: large; font-weight: bold;">Nurse information: </label>
                 <br/>
-                <label>Nurse information </label>
+                <label>First Name: </label> <br/><input type="text" name="nurse_fname" id = "nurse_fname"/>  <br/>
+                <label>Middle Name: </label> <br/><input type="text" name="nurse_mname" id = "nurse_mname"/> <br/>
+                <label>Last Name: </label><br/> <input type="text" name="nurse_lname" id = "nurse_lname"/>   <br/>
                 <br/>
-                <label>First Name </label> <input type="text" name="nurse_fname" id = "nurse_fname"/>  <br/>
-                <label>Middle Name </label> <input type="text" name="nurse_mname" id = "nurse_mname"/> <br/>
-                <label>Last Name </label> <input type="text" name="nurse_lname" id = "nurse_lname"/>   <br/>
+                <label style="font-size: large; font-weight: bold;">Room information</label>
                 <br/>
-                <label>Room information</label>
-                <br/>
-                <label>Room Type </label> <input type="text" name="n_room_type" id = "n_room_type"/>   <br/>
+                <label>Room Type: </label> <br/> <input type="text" name="n_room_type" id = "n_room_type"/>   
 
                 <button type="submit">
                     Assign Nurse
@@ -122,9 +121,17 @@
 
         </div>
         {% endblock %}
+          
         
-
     </div>
+    <br/>
+    
+    <form action="/" method="get">
+        <button style="background-color: #b12222; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "logout" type="submit">
+            Logout
+        </button>
+    </form>
+    
     <footer>
         <h3 style="text-align: center; padding: 3px; background-color: rgb(253, 253, 253); color: rgb(0, 0, 0);">
         Contact Us At: hospital@gmail.com
@@ -132,6 +139,7 @@
                          +911234567890               
         </h3>
     </footer>
+    
     </body>
 
 
