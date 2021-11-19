@@ -13,11 +13,7 @@
             
             <div style="float: right;" >
     
-                <form action="/" method="get">
-                    <button style="background-color: #b12222; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "logout" type="submit">
-                        Logout
-                    </button>
-                    </form>
+            
     
             </div>
         </div>
@@ -121,23 +117,20 @@
     
             <br/>
         </div>
-
-        
-
         <br/>
         <br/>
-        <button id = "show_generate_bill">
+        <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "show_generate_bill">
             Generate Bill
         </button>
 
         <br/>
         <div style="display: none;" id = "generate_bill_div">
             <form action="/generate_bill" method="POST">
-                <label>Enter the details of the patient </label><br/>
+                <label style="font-size: large; font-weight: bold;">Enter the details of the patient </label><br/>
 
-                <label>First Name </label> <input type="text" name="b_patient_fname" id = "b_patient_fname"/>  <br/>
-                <label>Middle Name </label> <input type="text" name="b_patient_mname" id = "b_patient_mname"/> <br/>
-                <label>Last Name </label> <input type="text" name="b_patient_lname" id = "b_patient_lname"/>   <br/>
+                <label>First Name: </label> <br/> <input type="text" name="b_patient_fname" id = "b_patient_fname"/>  <br/>
+                <label>Middle Name: </label> <br/><input type="text" name="b_patient_mname" id = "b_patient_mname"/> <br/>
+                <label>Last Name: </label> <br/><input type="text" name="b_patient_lname" id = "b_patient_lname"/>   <br/>
 
                 <br/>
                 <br/>
@@ -154,8 +147,13 @@
             {% endblock %}
     
             <br/>
+        </div>
         <br/>
-        
+        <form action="/" method="get">
+            <button style="background-color: #b12222; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "logout" type="submit">
+                Logout
+            </button>
+            </form>
         </div>
         <footer>
             <h3 style="text-align: center; padding: 3px; background-color: rgb(253, 253, 253); color: rgb(0, 0, 0);">
@@ -172,9 +170,6 @@
         var discharge_patient_div = document.getElementById("discharge_patient_div")
         var show_discharge_patient_but = document.getElementById("show_discharge_patient")
 
-        var generate_bill_div = document.getElementById("generate_bill_div")
-        var show_generate_bill_but = document.getElementById("show_generate_bill")
-
         function show(name){
             if(name=="get"){
                 get_patient_div.style.display = "block"
@@ -184,9 +179,6 @@
             }
             else if(name=="discharge"){
                 discharge_patient_div.style.display = "block"
-            }
-            else if(name=="generate"){
-                generate_bill_div.style.display = "block"
             }
             else{
 
@@ -202,12 +194,6 @@
         show_discharge_patient_but.addEventListener('click',(event)=>{
             if(discharge_patient_div.style.display=="none"){
                 show("discharge")
-            }
-        })
-
-        show_generate_bill_but.addEventListener('click',(event)=>{
-            if(generate_bill_div.style.display=="none"){
-                show("generate")
             }
         })
     </script>
