@@ -1,0 +1,15 @@
+{% extends 'Receptionist.html' %}
+
+{% block generate_bill_result %}
+{% if data["patient_not_exist"] ==1 %}
+    Patient doesn't exist
+{% elif data["Success"] == 0 %}
+    Treatment is incomplete or patient is not yet discharged
+{% else %}
+    Bill generated 
+{% endif %}
+<script>
+    document.getElementById("generate_bill_div").style.display= "block"
+    
+</script>
+{% endblock %}

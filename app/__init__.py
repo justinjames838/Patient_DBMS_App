@@ -310,6 +310,100 @@ def create_app(test_config=None):
                 return render_template("patient_discharge_res.html",data = data)
                 
 
+    @app.route("/generate_bill",methods = ["POST"])
+    def generate_bill():
+        if request.method == "POST":
+            b_patient_fname = request.form.get("b_patient_fname")
+          
+            b_patient_mname = request.form.get("b_patient_mname")
+       
+            b_patient_lname = request.form.get("b_patient_lname")
+
+            patients = db.execute("select patient_id from patient where fname = '"+b_patient_fname+"' and mname = '"+b_patient_mname+"' and lname = '"+b_patient_lname+"' ")
+            patients = [list(row)[0] for row in patients]
+
+            if(len(patients)==0):
+                data = dict()
+                data["patient_not_exist"] = 1
+                return render_template("generate_bill_res.html",data = data)
+            else:
+                res = db.execute("select * from patient where patient_id = '"+str(patients[0])+"' ")
+                count = 0
+                out = []
+
+                for row in res:
+                    out.append(row)
+
+                for i in range(len(out[0])):
+                    if (out[0][i] is None):
+                        count+=1
+                
+                if(count == 0):
+                    max_id = db.execute("select max(bill_id) from bill")
+                    max_id = [list(row) for row in max_id]
+                    max_id = [[int((str(bit))) for bit in item] for item in max_id]
+                    max_id = [item[0] for item in max_id]
+
+                    max_id = max_id[0] + 1
+                    max_id = str(max_id)
+
+                    multiplier = 1
+
+                    res2 = db.execute("select discharge_date-admit_date as diff from patient where patient_id = '"+str(patients[0])+"'")
+
+                    for row in res2:
+                        for bit in row:
+                            multiplier = int(bit)
+
+                    total_cost = 0
+
+                    consultation_cost = db.execute("select consultation_fee from doctor where doctor_id = (select attending_doc from patient where patient_id = '"+str(patients[0])+"')")
+                    consultation_cost = [list(row) for row in consultation_cost]
+                    consultation_cost = [[float((str(bit))) for bit in item] for item in consultation_cost]
+                    consultation_cost = [item[0] for item in consultation_cost]
+
+                    consultation_cost = consultation_cost[0]
+
+                    total_cost+=multiplier*consultation_cost
+
+                    consultation_cost = str(consultation_cost)
+
+                    room_cost = db.execute("select cost from room where room_id = (select room_no from patient where patient_id = '"+str(patients[0])+"')") 
+                    room_cost = [list(row) for row in room_cost]
+                    room_cost = [[float((str(bit))) for bit in item] for item in room_cost]
+                    room_cost = [item[0] for item in room_cost]
+
+                    room_cost = room_cost[0]
+
+                    total_cost+=multiplier*room_cost
+
+                    room_cost = str(room_cost)
+
+                    treatment_cost = db.execute("select cost from treatment where patient_id = '"+str(patients[0])+"'")
+                    treatment_cost = [list(row) for row in treatment_cost]
+                    treatment_cost = [[float((str(bit))) for bit in item] for item in treatment_cost]
+                    treatment_cost = [item[0] for item in treatment_cost]
+
+                    treatment_cost = treatment_cost[0]
+
+                    total_cost+=multiplier*treatment_cost
+
+                    treatment_cost = str(treatment_cost)
+
+                    total_cost = str(total_cost)
+
+                    db.execute("insert into bill values ('"+str(patients[0])+"','"+max_id+"','"+consultation_cost+"','"+room_cost+"',NULL,'"+treatment_cost+"','"+total_cost+"')")
+                    data = dict()
+                    data["Success"] = 1
+                    return render_template("generate_bill_res.html",data = data)
+                else:
+                    data=dict()
+                    data["Success"] = 0
+                    return render_template("generate_bill_res.html",data = data)
+
+                    
+
+
 
 
     return app
