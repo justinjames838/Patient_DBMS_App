@@ -17,10 +17,7 @@
         <form action="/" method="get">
         
 
-        <button style="background-color: #b12222; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;"id = "logout" type="submit">
-            Logout
-        </button>
-        </form>
+       
 
         </div>
     </div>
@@ -34,7 +31,7 @@
     <div style="display: none;" id = "get_medicine_div">
         <form action="/get_medicine" method="POST">
         <label id = "med_name_label">
-            Enter the name of the medicine  
+            Enter the name of the medicine:  
         </label>
         <input  type="text" name="med_name" id="med_name"/>
 
@@ -67,15 +64,18 @@
         <br/>
         <form action="/add_medicine" method="POST">
             <div>
-            <label class="generic_med_label">Name of medicine </label>
+            <label class="generic_med_label">Name of medicine:  </label>
+            <br/>
             <input type="text" name="new_med_name" id="new_med_name"/>
             
             <br/>
-            <label class="generic_med_label">Cost of medicine </label>
+            <label class="generic_med_label">Cost of medicine:   </label>
+            <br/>
             <input type="number" name="new_med_cost" id="new_med_cost"/>
             
             <br/>
-            <label class="generic_med_label">Info about medicine </label>
+            <label class="generic_med_label">Info about medicine: </label>
+            <br/>
             <input type="text" width="150" height="200" name="new_med_info" id="new_med_info"/>
             
             <button type="submit">
@@ -85,9 +85,10 @@
             </div>
         </form>
         <br/>
+        
         {% block insert_results %}
         <div id="med_insert_res_placeholder">
-
+        
         </div>
         {% endblock %}
         
@@ -124,6 +125,11 @@
             }
         })
     </script>
+    <form action="/" method="get">
+        <button style="background-color: #b12222; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "logout" type="submit">
+            Logout
+        </button>
+    </form>
     <footer>
         <h3 style="text-align: center; padding: 3px; background-color: rgb(253, 253, 253); color: rgb(0, 0, 0);">
         Contact Us At: hospital@gmail.com
