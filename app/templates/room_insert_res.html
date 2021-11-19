@@ -1,0 +1,16 @@
+{% extends 'Room_Manager.html' %}
+
+{% block insert_results %}
+
+{% if exists == 0 %}
+ Added Room successfully
+
+{% else %}  
+ Room details updated
+{% endif %}
+<script>
+    document.getElementById("add_room_div").style.display= "block"
+    
+</script>
+
+{% endblock %}

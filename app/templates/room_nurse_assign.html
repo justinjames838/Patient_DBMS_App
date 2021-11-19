@@ -1,0 +1,15 @@
+{% extends 'Room_Manager.html' %}
+
+{% block assign_results %}
+{% if data["room_not_exist"]==1 %}
+    Provided room does not exist
+{% elif data["nurse_not_exist"] == 1 %}
+    Provided nurse does not exist
+{% else %}
+    Room has been assigned successfully
+{% endif %}
+<script>
+    document.getElementById("assign_nurse_div").style.display= "block"
+    
+</script>
+{% endblock %}

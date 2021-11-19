@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h1>
-            Pharmacist 
-        </h1>
+    <div style="display: flex ;flex-direction: row; align-items: center;" id = "titlebar">
+        <div style="margin: 10px;">
+            <h1>Pharmacist</h1> 
+        </div>
         
-        <br/>
-        
+        <div style="float: right;" >
+
+        <form action="/" method="get">
+        <button id = "logout" type="submit">
+            Logout
+        </button>
+        </form>
+
+        </div>
+    </div>
+    <br/>
+    
+    <button id = "show_get_med">
+            Retrieve medicine details
+    </button>
+    <br/>
+    <br/>
+    <div style="display: none;" id = "get_medicine_div">
         <form action="/get_medicine" method="POST">
+        <label id = "med_name_label">
+            Enter the name of the medicine  
+        </label>
         <input  type="text" name="med_name" id="med_name"/>
 
         <button type="submit" id = get_medicine>
             Get medicine details
         </button>
         </form>
+
+
 
         <br/>
         {% block med_details %}
@@ -23,7 +45,18 @@
         {% endblock %}
 
         <br/>
+    </div>
 
+    <br/>
+
+    <button id = "show_add_med">
+        Add or update medicine details
+    </button>
+
+    <br/>
+    <br/>
+    <div style = "display: none;" id = "add_medicine_div">
+        <br/>
         <form action="/add_medicine" method="POST">
             <div>
             <label class="generic_med_label">Name of medicine </label>
@@ -38,16 +71,49 @@
             <input type="text" width="150" height="200" name="new_med_info" id="new_med_info"/>
             
             <button type="submit">
-                Add medicine
+                Add/update medicine
             </button>
 
             </div>
         </form>
+        <br/>
         {% block insert_results %}
         <div id="med_insert_res_placeholder">
 
         </div>
         {% endblock %}
+
+    </div>
     </body>
-    
+    <script>
+        var get_med_div = document.getElementById("get_medicine_div")
+        var show_get_med_but = document.getElementById("show_get_med")
+
+        var add_med_div = document.getElementById("add_medicine_div")
+        var show_add_med_but = document.getElementById("show_add_med")
+
+        function show(name){
+            if(name=="get"){
+                get_med_div.style.display = "block"
+            }
+            else if(name=="add"){
+                add_med_div.style.display = "block"
+            }
+            else{
+
+            }
+        }
+
+        show_get_med_but.addEventListener('click',(event)=>{
+            if(get_med_div.style.display=="none"){
+                show("get")
+            }
+        })
+
+        show_add_med_but.addEventListener('click',(event)=>{
+            if(add_med_div.style.display=="none"){
+                show("add")
+            }
+        })
+    </script>
 </html>

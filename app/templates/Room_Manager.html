@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div style="display: flex ;flex-direction: row; align-items: center;" id = "titlebar">
+            <div style="margin: 10px;">
+                <h1>Room Manager</h1> 
+            </div>
+            
+            <div style="float: right;" >
+    
+            <form action="/" method="get">
+            <button id = "logout" type="submit">
+                Logout
+            </button>
+            </form>
+    
+            </div>
+        </div>
+        
+        <br/>
+
+    <button id = "show_get_room">
+        Retrieve Room Details
+    </button>
+
+    <br/>
+        
+    <div style="display: none;" id = "get_room_div">
+        <form action="/get_room" method="POST">
+        <label id = "room_type_label">
+            Enter Room Type
+        </label>
+        <input  type="text" name="room_type" id="room_type"/>
+
+        <button type="submit" id = get_room>
+            Get Room details
+        </button>
+        </form>
+
+        <br/>
+        {% block room_details %}
+        <div id = "room_details">
+
+        </div>
+        {% endblock %}
+
+        <br/>
+    </div>
+    <br/>
+
+    <button id = "show_add_room">
+        Add or update room details
+    </button>
+
+    <br/>
+
+    <div style="display: none;" id = "add_room_div">
+        <form action="/add_room" method="POST">
+            <div>
+            <label class="room_label">Type of Room </label>
+            <input type="text" name="new_room_type" id="new_room_type"/>
+            
+            <br/>
+            <label class="room_label">Cost of Room </label>
+            <input type="number" name="new_room_cost" id="new_room_cost"/>
+            
+            <br/>
+ 
+            <button type="submit">
+                Add Room
+            </button>
+
+            </div>
+        </form>
+        {% block insert_results %}
+        <div id="room_insert_res_placeholder">
+
+        </div>
+        {% endblock %}
+
+        <br/>
+
+    </div>
+
+    <br/>
+
+    <button id = "show_assign_nurse">
+        Assign nurses to a room
+    </button>
+
+    <br/>
+
+    <div style="display: none;" id = "assign_nurse_div">
+        <form action="/assign_nurse" method="POST">
+            <div>
+                <label>Enter the details of the nurse and the room information</label>
+                <br/>
+                <br/>
+                <label>Nurse information </label>
+                <br/>
+                <label>First Name </label> <input type="text" name="nurse_fname" id = "nurse_fname"/>  <br/>
+                <label>Middle Name </label> <input type="text" name="nurse_mname" id = "nurse_mname"/> <br/>
+                <label>Last Name </label> <input type="text" name="nurse_lname" id = "nurse_lname"/>   <br/>
+                <br/>
+                <label>Room information</label>
+                <br/>
+                <label>Room Type </label> <input type="text" name="n_room_type" id = "n_room_type"/>   <br/>
+
+                <button type="submit">
+                    Assign Nurse
+                </button>
+            </div>
+        </form>
+
+        {% block assign_results %}
+        <div id="nurse_room_assign_placeholder">
+
+        </div>
+        {% endblock %}
+
+    </div>
+
+    </body>
+
+
+    <script>
+        var get_room_div = document.getElementById("get_room_div")
+        var show_get_room_but = document.getElementById("show_get_room")
+
+        var add_room_div = document.getElementById("add_room_div")
+        var show_add_room_but = document.getElementById("show_add_room")
+
+        var assign_nurse_div = document.getElementById("assign_nurse_div")
+        var show_assign_nurse_but = document.getElementById("show_assign_nurse")
+
+        function show(name){
+            if(name=="get"){
+                get_room_div.style.display = "block"
+            }
+            else if(name=="add"){
+                add_room_div.style.display = "block"
+            }
+            else if(name=="assign"){
+                assign_nurse_div.style.display = "block"
+            }
+            else{
+
+            }
+        }
+
+        show_get_room_but.addEventListener('click',(event)=>{
+            if(get_room_div.style.display=="none"){
+                show("get")
+            }
+        })
+
+        show_add_room_but.addEventListener('click',(event)=>{
+            if(add_room_div.style.display=="none"){
+                show("add")
+            }
+        })
+
+        show_assign_nurse_but.addEventListener('click',(event)=>{
+            if(assign_nurse_div.style.display=="none"){
+                show("assign")
+            }
+        })
+    </script>
+    
+</html>

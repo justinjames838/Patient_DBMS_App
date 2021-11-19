@@ -1,19 +1,18 @@
-{% extends 'Pharmacist.html'%}
+{% extends 'Room_Manager.html'%}
 
-{% block med_details %}
-        <div id = "med_details">
+{% block room_details %}
+        <div id = "room_details">
             {% if res.data|length >0 %}
             <table>
-                <tr class = "med_row">
+                <tr class = "room_row">
                     <td>ID</td>
+                    <td>Type</td>
                     <td>Cost</td>
-                    <td>Name</td>
-                    <td>Info</td>
                 </tr>
                 {% for row in res.data %}
-                <tr class = "med_row">
+                <tr class = "room_row">
                     {% for col in row %}
-                    <td class = "med_col">
+                    <td class = "room_col">
                         {{col}}
                     </td>
                     {% endfor %}
@@ -25,6 +24,6 @@
             {% endif %}
         </div>
         <script>
-            document.getElementById("get_medicine_div").style.display= "block"
+            document.getElementById("get_room_div").style.display= "block"
         </script>
 {% endblock %}
