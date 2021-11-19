@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <header>
+            <h2 style="text-align: center; padding: 3px; background-color: darksalmon; color: white;">
+                HOSPITAL DATABASE MANAGEMENT SYSTEM
+            </h2>
+        </header>
         <div style="display: flex ;flex-direction: row; align-items: center;" id = "titlebar">
             <div style="margin: 10px;">
                 <h1>Receptionist</h1> 
@@ -8,17 +13,13 @@
             
             <div style="float: right;" >
     
-            <form action="/" method="get">
-            <button id = "logout" type="submit">
-                Logout
-            </button>
-            </form>
+            
     
             </div>
         </div>
         
         <br/>
-        <button id = "show_add_patient">
+        <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "show_add_patient">
             Register a patient
         </button>
 
@@ -26,42 +27,44 @@
         
         <div style="display: none;" id = "add_patient_div">
             <form action="/add_patient" method="POST">
-            <label>Enter the details of the patient </label><br/>
+            <label style="font-size: large; font-weight: bold;">Enter the details of the patient </label><br/>
             
-            <label>First Name </label> <input type="text" name="patient_fname" id = "patient_fname"/>  <br/>
-            <label>Middle Name </label> <input type="text" name="patient_mname" id = "patient_mname"/> <br/>
-            <label>Last Name </label> <input type="text" name="patient_lname" id = "patient_lname"/>   <br/>
+            <label>First Name: </label> <br/> <input type="text" name="patient_fname" id = "patient_fname"/>  <br/>
+            <label>Middle Name: </label> <br/> <input type="text" name="patient_mname" id = "patient_mname"/> <br/>
+            <label>Last Name: </label> <br/> <input type="text" name="patient_lname" id = "patient_lname"/>   <br/>
 
             <br/>
 
-            <label>Gender </label>
+            <label>Gender: </label> <br/>
             <select id = "patient_gender" name ="patient_gender">
                 <option selected value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
             <br/>
 
-            <label>Phone no </label>
+            <label>Phone no: </label> <br/>
             <input type="tel" id ="patient_phone" name = "patient_phone"/>
             <br/>
 
-            <label>Age </label>
+            <label>Age: </label> <br/>
             <input type="number" id="patient_age" name = "patient_age"/>
             <br/>
 
-            <label>Admission Date </label>
+            <label>Admission Date: </label> <br/>
             <input type="date" id = "patient_admit_date" name = "patient_admit_date"/>
             <br/>
 
-            <label>Room type </label>
+            <label>Room type: </label> <br/>
+        
             <input type="text" id = "patient_room_type" name = "patient_room_type"/>
             <br/>
+            <br/>
 
-            <label>Enter attending doctor's details </label><br/>
-            <label>First Name </label> <input type="text" name="attending_doc_fname" id = "attending_doc_fname"/>  <br/>
-            <label>Middle Name </label> <input type="text" name="attending_doc_mname" id = "attending_doc_mname"/> <br/>
-            <label>Last Name </label> <input type="text" name="attending_doc_lname" id = "attending_doc_lname"/>   <br/>
-
+            <label style="font-size: large; font-weight: bold;">Enter attending doctor's details </label><br/>
+            <label>First Name: </label> <br/><input type="text" name="attending_doc_fname" id = "attending_doc_fname"/>  <br/>
+            <label>Middle Name: </label> <br/><input type="text" name="attending_doc_mname" id = "attending_doc_mname"/> <br/>
+            <label>Last Name: </label> <br/> <input type="text" name="attending_doc_lname" id = "attending_doc_lname"/>   <br/>
+            <br/>
             <button type="submit">
                 Add Patient
             </button>
@@ -81,22 +84,22 @@
         <br/>
         <br/>
         
-        <button id = "show_discharge_patient">
+        <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "show_discharge_patient">
             Discharge Patient
         </button>
 
         <br/>
         <div style="display: none;" id="discharge_patient_div">
             <form action="/discharge_patient" method="POST">
-                <label>Enter the details of the patient </label><br/>
+                <label style="font-size: large; font-weight: bold;">Enter the details of the patient </label><br/>
 
-                <label>First Name </label> <input type="text" name="d_patient_fname" id = "d_patient_fname"/>  <br/>
-                <label>Middle Name </label> <input type="text" name="d_patient_mname" id = "d_patient_mname"/> <br/>
-                <label>Last Name </label> <input type="text" name="d_patient_lname" id = "d_patient_lname"/>   <br/>
+                <label>First Name: </label> <br/><input type="text" name="d_patient_fname" id = "d_patient_fname"/>  <br/>
+                <label>Middle Name: </label> <br/><input type="text" name="d_patient_mname" id = "d_patient_mname"/> <br/>
+                <label>Last Name: </label> <br/><input type="text" name="d_patient_lname" id = "d_patient_lname"/>   <br/>
 
                 <br/>
 
-                <label>Enter discharge date </label><br/>
+                <label>Enter discharge date: </label><br/>
                 <input type="date" id="patient_discharge_date" name="patient_discharge_date"/> <br/>
 
                 <br/>
@@ -114,9 +117,20 @@
     
             <br/>
         </div>
-
+        <br/>
+        <form action="/" method="get">
+            <button style="background-color: #b12222; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;" id = "logout" type="submit">
+                Logout
+            </button>
+            </form>
         </div>
-        
+        <footer>
+            <h3 style="text-align: center; padding: 3px; background-color: rgb(253, 253, 253); color: rgb(0, 0, 0);">
+            Contact Us At: hospital@gmail.com
+            <br/>
+                             +911234567890               
+            </h3>
+        </footer>
     </body>
     <script>
         var add_patient_div = document.getElementById("add_patient_div")
